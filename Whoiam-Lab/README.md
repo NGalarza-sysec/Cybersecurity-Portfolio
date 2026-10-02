@@ -1,4 +1,4 @@
-# <u>Informe de Laboratorio: Whoiam</u>
+# Informe de Laboratorio: Whoiam
 
 El presente documento detalla el proceso de analisis de vulnerabilidades y pruebas de penetracion (*Pentesting*) realizado sobre la maquina , un entorno controlado desplegado localmente mediante la plataforma **DockerLabs**. 
 
@@ -25,28 +25,36 @@ El objetivo es identificar servicios expuestos, explotar fallos de configuracion
 >
 >**HTTP 80 open**
 ---
-##  <u>2.  Impeccion del Servicio Web. Reconocimiento HTTP</u>
+## 2.  Impeccion del Servicio Web. Reconocimiento HTTP 
 
-> [!TARGET] *Objetivo*
-**Navegar al Servicio web:** 
+>[!NOTE] 
+>**🎯  Objetivo**
+>
+>**Navegar al Servicio web:** 
 
-![[IMG-2.png]]
+![](Imagenes/IMG-2.png)
 
 ---
-## <u>3.  Ataque de Fuerza Bruta: Gobuster</u>
+## 3.  Ataque de Fuerza Bruta: Gobuster
 
->[!TARGET] *Objetivo*
-Ejecutamos el siguiente comando para obtener sus Carpetas y/o Archivos con Gobuster.
+>[!NOTE]
+> **🎯  Objetivo**
+>
+>**Ejecutamos el siguiente comando para obtener sus Carpetas y/o Archivos con Gobuster.**
+
 ```bash
 gobuster dir -u http://172.18.0.2 -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -x php,sh,html,py,zip,rar
 ```
 
-![[IMG-3.png]]
+![](Imagenes/IMG-3.png)
 
-> [!TARGET] ***Plan de Accion y Rutas de Explotacion***
+> [!IMPORTANT] 
+>***Plan de Accion y Rutas de Explotacion***
 >
-> > [!success] Ruta 1: Plan de Accion. Revisa el directorio /backups
+> > [!TIP] 
+> > Ruta 1: Plan de Accion. Revisa el directorio /backups
 > > Navega desde el navegador. Muchas veces hay archivos de respaldo de la base de datos (como .sql), contraseñas en texto plano, credenciales de WordPress o copias de seguridad de archivos clave.
+> >
 > > ```bash
 > > [http://172.18.0.2/backups/]
 > > ```
