@@ -40,7 +40,14 @@ El objetivo es identificar servicios expuestos, explotar fallos de configuracion
 >[!NOTE]
 > **🎯  Objetivo**
 >
->**Ejecutamos el siguiente comando para obtener sus Carpetas y/o Archivos con Gobuster.**
+> **Con el propósito de identificar la superficie de ataque expuesta en el servidor web, se procede a realizar una fase de fuzzing web y enumeración de directorios. Esta técnica permite descubrir recursos ocultos, archivos de respaldo o rutas de administración que no están indexadas de forma pública, pero que permanecen accesibles a través del protocolo HTTP.
+Para ello, se emplea la herramienta Gobuster v3.8 en modo dir, configurada bajo los siguientes parámetros técnicos:**
+>
+• Diccionario utilizado: directory-list-2.3-medium.txt (Wordlist estándar para la identificación de rutas comunes).
+
+• Filtro de extensiones: Se realiza una búsqueda dirigida para localizar archivos con extensiones específicas como .php, .html, .sh, .py, .zip y .rar, optimizando así el descubrimiento tanto de scripts de ejecución como de posibles contenedores de respaldo comprimidos.
+
+• Objetivo: Analizar las respuestas del servidor (códigos de estado HTTP como 200 OK o 301 Moved Permanently) para mapear de forma precisa la estructura interna del sitio web bajo auditoría.
 
 ```bash
 gobuster dir -u http://172.18.0.2 -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -x php,sh,html,py,zip,rar
