@@ -96,19 +96,15 @@ gobuster dir -u http://172.18.0.2 -w /usr/share/wordlists/dirbuster/directory-li
 
 ![](Imagenes/IMG-4.png)
 
->[!NOTA]
+>[!NOTE]
 >### Descarga y Descompresión
 >
 >Se transfiere el archivo hacia el equipo atacante y se extraen sus elementos:
 >
->```bash
->
+>```
 >wget http://172.18.0
 >
 >unzip databaseback2may.zip```
-
-
-
 
 > [!info] Inspección del Archivo Extraído
 > Tras descomprimir el paquete `.zip`, se obtuvo el archivo `29DBMay`. Se procede a analizar su tipo y contenido mediante comandos de consola:
