@@ -12,13 +12,13 @@ El objetivo es identificar servicios expuestos, explotar fallos de configuracion
 ## 1.  Escaneo de Puerto. Nmap
 
 >[!NOTE] 
-**:target:Objetivo**
-**Indentificar Puertos abiertos Ejecutando Nmap 172.18.0.2**
+**:target: Objetivo**
+>**Indentificar Puertos abiertos Ejecutando Nmap 172.18.0.2**
 
 ![](Imagenes/IMG-1.png)
 
 >[!TIP] 
-**:white_check_mark:Resultado:**
+**:white_check_mark: Resultado:**
 **HTTP 80 open**
 ---
 ##  <u>2.  Impeccion del Servicio Web. Reconocimiento HTTP</u>
