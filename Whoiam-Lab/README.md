@@ -5,21 +5,23 @@ El presente documento detalla el proceso de analisis de vulnerabilidades y prueb
 El objetivo es identificar servicios expuestos, explotar fallos de configuracion o vulnerabilidades de software, y escalar privilegios hasta obtener acceso total como el usuario administrador (`root`).
 
 **Curso:** [Ciberseguridad BIOS]
+
 **Atacantes:** [NGalarza-sysec]
+
 **Objetivo:** [DockerLab: Whoiam]
 
 ---
 ## 1.  Escaneo de Puerto. Nmap
 
 >[!NOTE] 
-**:target: Objetivo**
+**🎯  Objetivo**
 >**Indentificar Puertos abiertos Ejecutando Nmap 172.18.0.2**
 
 ![](Imagenes/IMG-1.png)
 
 >[!TIP] 
-**:white_check_mark: Resultado:**
-**HTTP 80 open**
+**✅  Resultado:**
+>**HTTP 80 open**
 ---
 ##  <u>2.  Impeccion del Servicio Web. Reconocimiento HTTP</u>
 
