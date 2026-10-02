@@ -4,25 +4,32 @@ El presente documento detalla el proceso de analisis de vulnerabilidades y prueb
 
 El objetivo es identificar servicios expuestos, explotar fallos de configuracion o vulnerabilidades de software, y escalar privilegios hasta obtener acceso total como el usuario administrador (`root`).
 
-**Curso:** [Ciberseguridad BIOS]
+* **Curso:** [Ciberseguridad BIOS]
 
-**Atacantes:** [NGalarza-sysec]
+* **Auditoria:** [NGalarza-sysec]
 
-**Objetivo:** [DockerLab: Whoiam]
+* **Objetivo de Evaluación:** Máquina Whoiam (IP: `172.18.0.2`)
 
 ---
-## 1.  Escaneo de Puerto. Nmap
+## 1.  Escaneo de Puerto. (Nmap)
+
 >[!NOTE] 
 >**🎯  Objetivo**
 >
 >**Indentificar Puertos abiertos Ejecutando Nmap 172.18.0.2**
 
+```bash
+nmap 172.18.0.2
+```
 ![](Imagenes/IMG-1.png)
 
->[!TIP] 
+>[!NOTE] 
 >**✅  Resultado:**
+>* **Port 80/tcp:** Servicio HTTP abierto (Servidor Web).
+> 
+>Interactuar con el servicio HTTP expuesto en el puerto 80 para auditar el contenido de la página web principal.
+Al navegar a la dirección `http://172.18.0.2`, se observa una landing page estática con el título *"Whoiam: I don't know who I am, I have to find out."* y un botón de interacción (*About us*). No se aprecian formularios ni parámetros visibles a simple vista.
 >
->**HTTP 80 open**
 ---
 ## 2.  Impeccion del Servicio Web. Reconocimiento HTTP 
 >[!NOTE] 
