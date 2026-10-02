@@ -31,24 +31,21 @@ nmap 172.18.0.2
 ## 2.  Impeccion del Servicio Web. Reconocimiento HTTP 
 >[!NOTE] 
 >**🎯  Objetivo**
+>
 > Interactuar con el servicio HTTP expuesto en el puerto 80 para auditar el contenido de la página web principal.
 >
 >Al navegar a la dirección `http://172.18.0.2`, se observa una landing page estática con el título *"Whoiam: I don't know who I am, I have to find out."* y un botón de interacción (*About us*). No se aprecian formularios ni parámetros visibles a simple vista.
 
 ![](Imagenes/IMG-2.png)
 
-## 3.  Descripción del Procedimiento / Metodología de Ejecución
+## 3. Descubrimiento de Rutas (Fuzzing con Gobuster)
 >[!NOTE]
 > **🎯  Objetivo**
 >
-> **Con el propósito de identificar la superficie de ataque expuesta en el servidor web, se procede a realizar una fase de fuzzing web y enumeración de directorios. Esta técnica permite descubrir recursos ocultos, archivos de respaldo o rutas de administración que no están indexadas de forma pública, pero que permanecen accesibles a través del protocolo HTTP.
-Para ello, se emplea la herramienta Gobuster v3.8 en modo dir, configurada bajo los siguientes parámetros técnicos:**
+>Ejecutar un proceso de *fuzzing web* automatizado para mapear la estructura interna del sitio e identificar directorios ocultos o archivos expuestos.
 >
->• Diccionario utilizado: directory-list-2.3-medium.txt (Wordlist estándar para la identificación de rutas comunes).
->
->• Filtro de extensiones: Se realiza una búsqueda dirigida para localizar archivos con extensiones específicas como .php, .html, .sh, .py, .zip y .rar, optimizando así el descubrimiento tanto de scripts de ejecución como de posibles contenedores de respaldo comprimidos.
->
->• Objetivo: Analizar las respuestas del servidor (códigos de estado HTTP como 200 OK o 301 Moved Permanently) para mapear de forma precisa la estructura interna del sitio web bajo auditoría.
+>Se realiza una búsqueda dirigida utilizando un diccionario estándar y especificando extensiones comunes de ejecución y compresión:
+
 
 ```bash
 gobuster dir -u http://172.18.0.2 -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -x php,sh,html,py,zip,rar
@@ -56,51 +53,62 @@ gobuster dir -u http://172.18.0.2 -w /usr/share/wordlists/dirbuster/directory-li
 
 ![](Imagenes/IMG-3.png)
 
-> [!IMPORTANT] 
->***Plan de Accion y Rutas de Explotacion***
->
-> > [!TIP] 
-> > Ruta 1: Plan de Accion. Revisa el directorio /backups
-> > Navega desde el navegador. Muchas veces hay archivos de respaldo de la base de datos (como .sql), contraseñas en texto plano, credenciales de WordPress o copias de seguridad de archivos clave.
-> >
-> > ```bash
-> > [http://172.18.0.2/backups/]
-> > ```
->
-> > [!warning] Ruta 2: Reconocimiento y Fuerza Bruta con WPScan
-> > Como detectamos `/wp-content` y `/wp-login.php`, lo ideal es enumerar usuarios y vulnerabilidades de plugins/temas con WPScan.
-> > 
-> > **Enumerar usuarios válidos:**
-> > ```bash
-> > wpscan --url [http://172.18.0.2](http://172.18.0.2) --enumerate u
-> > ```
-> > **Fuerza bruta a los usuarios encontrados:**
-> > Una vez que tengas nombres de usuario (por ejemplo, `admin` o el nombre del laboratorio), puedes lanzar fuerza bruta al panel `/wp-login.php`.
-> > ```bash
-> > wpscan --url [http://172.18.0.2](http://172.18.0.2) -U <usuario_encontrado> -P /usr/share/wordlists/rockyou.txt
-> > ```
->
-> > [!info] Ruta 3: Inspeccion de Metadata y Archivos Expuestos
-> > **Revisar `/readme.html`:**
-> > A veces la versión de WordPress está expuesta ahí y te ayuda a buscar exploits públicos en searchsploit.
+### Análisis de las Respuestas del Servidor
+**El escaneo por fuerza bruta reportó las siguientes rutas de interés crítico:**
+* `/wp-content/` (Status: 301) -> **Confirma el uso del CMS WordPress.**
+* `/wp-login.php` (Status: 200) -> **Panel de inicio de sesión administrativo.**
+* `/backups/` (Status: 301) -> **Directorio de almacenamiento expuesto.**
+* `readme.html` (Status: 200) -> **Archivo de documentación por defecto de WordPress.**
+  
+## 4. Plan de Acción y Rutas de Explotación
 
----
-## <u>3.1 Explotación de la Ruta 1: Análisis del Respaldo Web</u>
+**A partir del reconocimiento previo, se trazan tres vectores potenciales de ataque:**
 
- Al acceder al directorio `/backups` desde el navegador, se identificó un archivo comprimido de respaldo denominado `databaseback2may.zip`.
-
-![[IMG-4.png]]
-
-> [!TARGET] Descarga y Descompresión
-> **1. Descarga del archivo mediante `wget`:**
-> ```bash
-> wget [http://172.18.0.2/backups/databaseback2may.zip]
-> ```
+>[!NOTE]
 > 
-> **2. Descompresión del archivo `.zip`:**
-> ```bash
-> unzip databaseback2may.zip
-> ```
+> **Ruta 1: Auditoría del Directorio `/backups`**
+> 
+> Se inspeccionará de forma manual el directorio web expuesto para comprobar si almacena copias de seguridad de la base de datos (`.sql`), credenciales en texto plano o configuraciones sensibles.
+> 
+> * **URL:** `http://172.18.0.2/backups/`
+
+>[!WARNING]
+> 
+> **Ruta 2: Reconocimiento y Fuerza Bruta con WPScan**
+> 
+> Al confirmarse la existencia de WordPress, se plantea una enumeración agresiva de usuarios y complementos vulnerables utilizando la suite WPScan.
+> 
+> * *Enumeración de usuarios:* `wpscan --url http://172.18.0.2 --enumerate u`
+> * 
+> * *Fuerza bruta al panel administrativo:* `wpscan --url http://172.18.0.2 -U <usuario> -P /usr/share/wordlists/rockyou.txt`
+
+>[!NOTE]
+> 
+> **Ruta 3: Inspección de Metadatos en `readme.html`**
+> 
+> Revisión del archivo de texto expuesto para extraer la versión exacta del CMS y contrastar vulnerabilidades públicas asociadas en bases de datos como *Searchsploit*.
+
+## 5. Fase de Explotación
+
+### 5.1 Explotación de la Ruta 1: Análisis del Respaldo Web
+
+ Al acceder de manera directa al directorio `/backups/` desde el navegador, se constató que el indexado de archivos web se encuentra activo, exponiendo un paquete comprimido llamado `databaseback2may.zip`.
+
+![](Imagenes/IMG-4.png)
+
+>[!NOTA]
+>### Descarga y Descompresión
+>
+>Se transfiere el archivo hacia el equipo atacante y se extraen sus elementos:
+>
+>```bash
+>
+>wget http://172.18.0
+>
+>unzip databaseback2may.zip```
+
+
+
 
 > [!info] Inspección del Archivo Extraído
 > Tras descomprimir el paquete `.zip`, se obtuvo el archivo `29DBMay`. Se procede a analizar su tipo y contenido mediante comandos de consola:
