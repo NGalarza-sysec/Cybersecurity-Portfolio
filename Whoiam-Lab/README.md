@@ -129,13 +129,15 @@ gobuster dir -u http://172.18.0.2 -w /usr/share/wordlists/dirbuster/directory-li
 >### 5.2 Autenticación y Acceso al Panel de Administración (WordPress)
 >
 >Las credenciales obtenidas se validaron en el formulario `/wp-login.php`, logrando un inicio de sesión exitoso y acceso total al *Dashboard* (`/wp-admin/`) bajo el contexto del usuario `developer`.
-
-**Información recolectada del entorno:**
-* **Versión del CMS:** `WordPress 6.5.4`
-* **Tema Activo:** `Twenty Twenty-Four`
-* **Plugins Instalados:** `**Modern Events Calendar (M.E. Calendar)**`
-
-
+>
+>**Información recolectada del entorno:**
+>
+>* **Versión del CMS:** **`WordPress 6.5.4`**
+>  
+>* **Tema Activo:** **`Twenty Twenty-Four`**
+>  
+* **Plugins Instalados:** **`Modern Events Calendar (M.E. Calendar)`**
+  
 ![](Imagenes/IMG-6.png)
 ![](Imagenes/IMG-7.png)
 
