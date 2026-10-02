@@ -122,22 +122,22 @@ gobuster dir -u http://172.18.0.2 -w /usr/share/wordlists/dirbuster/directory-li
 > 
 >* **Password:** `2wmy3KrGDRD%RsA7Ty5n71L^`
 
->[!success] Credenciales Expuestas en Respaldo
->Al ejecutar cat 29DBMay, se hallaron credenciales válidas en texto plano:
+![](Imagenes/IMG-5.png)
+
+>[!NOTE]
 >
->**`Username: developer`**   
+>### 5.2 Autenticación y Acceso al Panel de Administración (WordPress)
 >
->**`Password: 2wmy3KrGDRD%RsA7Ty5n71L^`**
+>Las credenciales obtenidas se validaron en el formulario `/wp-login.php`, logrando un inicio de sesión exitoso y acceso total al *Dashboard* (`/wp-admin/`) bajo el contexto del usuario `developer`.
 
-![[IMG-5.png]]
+**Información recolectada del entorno:**
+* **Versión del CMS:** `WordPress 6.5.4`
+* **Tema Activo:** `Twenty Twenty-Four`
+* **Plugins Instalados:** `**Modern Events Calendar (M.E. Calendar)**`
 
----
-## <u>3.2 Autenticación y Acceso al Panel de Administración (WordPress)</u>
 
->[!TARGET] Se procedió a validar las credenciales halladas en el archivo de respaldo (`developer` / `2wmy3KrGDRD%RsA7Ty5n71L^`) ingresando al formulario de inicio de sesión en `/wp-login.php`.
-
-![[IMG-6.png]]
-![[IMG-7.png]]
+![](Imagenes/IMG-6.png)
+![](Imagenes/IMG-7.png)
 
 > [!success] Acceso Exitoso al Dashboard
 > La autenticación fue exitosa, otorgando acceso completo al panel de administración de WordPress (`/wp-admin/`).
@@ -149,9 +149,8 @@ gobuster dir -u http://172.18.0.2 -w /usr/share/wordlists/dirbuster/directory-li
 > * **Tema activo:** Twenty Twenty-Four
 > * **Plugins detectados:** Modern Events Calendar, M.E. Calendar
 
-![[IMG-8.png]]
+![](Imagenes/IMG-8.png)
 
----
 ## <u>3.3 Creación y Configuración del Plugin Malicioso</u>
 
 Para lograr la ejecución remota de comandos (RCE) y establecer la conexión inversa, se diseñó un plugin personalizado para WordPress que actúa como webshell y disparador de reverse shell.
@@ -225,13 +224,12 @@ Para lograr la ejecución remota de comandos (RCE) y establecer la conexión inv
 > 2. Cargar el archivo `ctf-shell.zip` y presionar **Install Now**.
 > 3. Al procesarse, el archivo queda disponible en la ruta del servidor dentro de `/wp-content/plugins/ctf-shell/plugin-shell.php`.
 
-![[IMG-9.png]]
+![](Imagenes/IMG-9.png)
 
-![[IMG-10.png]]
+![](Imagenes/IMG-10.png)
 
-![[IMG-11.png]]
+![](Imagenes/IMG-11.png)
 
----
 ## <u>3.5 Estabilización de la Listener y Disparo</u>
 
 > [!example] 1. Inicialización del Listener (`netcat`)
@@ -240,7 +238,7 @@ Para lograr la ejecución remota de comandos (RCE) y establecer la conexión inv
 > nc -lvnp 4444
 > ```
 
-![[IMG-12.png]]
+![](Imagenes/IMG-12.png)
 
 > [!example]  2. Ejecución de la Solicitud HTTP (`curl`)
 > Para invocar el script y transmitir los parámetros de conexión, se utiliza `curl` estructurando los argumentos de manera explícita:
@@ -257,13 +255,11 @@ Para lograr la ejecución remota de comandos (RCE) y establecer la conexión inv
 > * **`--data-urlencode`:** Realiza la codificación correcta de los parámetros en la URL.
 ---
 
-![[IMG-13.png]]
+![](Imagenes/IMG-13.png)
 
 > [!success] Confirmación de Conexión Inversa (Reverse Shell)
 > Al ejecutar el comando `curl`, la petición se mantiene en espera (*Request completely sent off*), lo cual confirma que el proceso PHP inició exitosamente la sesión interactiva `/bin/bash` hacia el listener de `netcat`
----
 
----
 ## 3.6 <u> Metodo estandar de estabilizacion </u>
 
 >[!TARGET] Tratamiento de la Shell (TTY Stabilization)
@@ -286,9 +282,8 @@ stty raw -echo; fg
  export SHELL=bash
 ```
 
-![[IMG-14.png]]
+![](Imagenes/IMG-14.png)
 
----
 ## <u>4. Estado Actual y Siguientes Pasos (Escalación de Privilegios)</u>
 
 > [!info] Alcance del Acceso Obtenido
@@ -296,12 +291,11 @@ stty raw -echo; fg
 > 
 > **Fase Siguiente:** Escalación de privilegios hacia la cuenta `root`.
 
----
 ## <u>4.1 Identificación de Permisos Elevados (`sudo -l`)</u>
 
 En la sesión de `netcat`, se ejecutó `sudo -l` para verificar los permisos del usuario `www-data`.
 
-![[IMG-15.png]]
+![](Imagenes/IMG-15.png)
 
 > [!success] Resultado del Análisis
 > Se detectó la regla `(rafa) NOPASSWD: /usr/bin/find`. Esto permite ejecutar el comando `find` con los privilegios del usuario `rafa` sin ingresar contraseña.
@@ -327,10 +321,9 @@ En la sesión de `netcat`, se ejecutó `sudo -l` para verificar los permisos del
 > ```
 > **Identificación:** Se detecta un nuevo vector de escalación horizontal hacia el usuario `ruben` mediante el uso del binario `/usr/sbin/debugfs`.
 
----
 ## <u>4.2 Escalación Horizontal (`rafa` -> `ruben`)</u>
 
-![[IMG-16.png]]
+![](Imagenes/IMG-16.png)
 
 > [!abstract] Vector de Explotación (`debugfs`)
 > El binario `/usr/sbin/debugfs` permite la ejecución de comandos del sistema operativo desde su prompt interactivo anteponiendo el carácter `!`.
@@ -345,9 +338,7 @@ En la sesión de `netcat`, se ejecutó `sudo -l` para verificar los permisos del
 >    debugfs: !/bin/bash
 >    ```
 > 3. Se verifica la identidad del nuevo contexto mediante `whoami` (`ruben`).
----
 
----
 ## <u>4.3 Enumeración y Escalación Vertical (`ruben` -> `root`)</u>
 
 > [!info] Enumeración de Reglas de Sudo
@@ -382,9 +373,8 @@ En la sesión de `netcat`, se ejecutó `sudo -l` para verificar los permisos del
 > * **Payload Introducido:** `a[$(/bin/bash >&2)]+42`
 > * **Resultado Obtenido:** Sub-shell instanciada bajo la identidad de `root` (`whoami` $\rightarrow$ `root`).
 
-![[IMG-17.png]]
+![](Imagenes/IMG-17.png)
 
----
 ## <u>5. Conclusión y Recomendaciones de Hardening</u>
 
 > [!warning] Medidas Correctivas Integrales
@@ -403,7 +393,6 @@ En la sesión de `netcat`, se ejecutó `sudo -l` para verificar los permisos del
 >    * Mantener la directiva `define('DISALLOW_FILE_MODS', true);` en `wp-config.php` para impedir la instalación o modificación no autorizada de complementos.
 >    * Eliminar copias de seguridad o respaldos comprimidos (`.zip`, `.sql`) guardados en directorios web accesibles (`/backups`).
 
----
 ## <u>6. Resumen de la Cadena Completa</u>
 
 | Fase                       | Contexto Inicial  | Vector / Herramienta              | Contexto Obtenido |
@@ -413,5 +402,5 @@ En la sesión de `netcat`, se ejecutó `sudo -l` para verificar los permisos del
 | 3. Escalación Horizontal 2 | `rafa`            | `sudo -u ruben /usr/sbin/debugfs` | `ruben`           |
 | 4. Escalación Vertical     | `ruben`           | Inyección en `/opt/penguin.sh`    | **`root`**        |
 
-![[IMG-18.png]]
+![](Imagenes/IMG-18.png)
 
