@@ -35,7 +35,7 @@ El objetivo es identificar servicios expuestos, explotar fallos de configuracion
 ![](Imagenes/IMG-2.png)
 
 ---
-## 3.  Ataque de Fuerza Bruta: Gobuster
+## 3.  Descripción del Procedimiento / Metodología de Ejecución
 
 >[!NOTE]
 > **🎯  Objetivo**
