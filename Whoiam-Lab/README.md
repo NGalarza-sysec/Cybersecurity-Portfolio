@@ -1,4 +1,4 @@
-## <u>Informe de Laboratorio: Whoiam</u>
+# <u>Informe de Laboratorio: Whoiam</u>
 
 El presente documento detalla el proceso de analisis de vulnerabilidades y pruebas de penetracion (*Pentesting*) realizado sobre la maquina , un entorno controlado desplegado localmente mediante la plataforma **DockerLabs**. 
 
@@ -9,9 +9,9 @@ El objetivo es identificar servicios expuestos, explotar fallos de configuracion
 **Objetivo:** [DockerLab: Whoiam]
 
 ---
-# 1.  Escaneo de Puerto. Nmap
+## 1.  Escaneo de Puerto. Nmap
 
-> [!NOTE] **Objetivo**
+> **[!NOTE] Objetivo**
 **Indentificar Puertos abiertos Ejecutando Nmap 172.18.0.2**
 
 ![](Imagenes/IMG-1.png)
