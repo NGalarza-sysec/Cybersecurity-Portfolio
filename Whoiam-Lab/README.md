@@ -12,7 +12,6 @@ El objetivo es identificar servicios expuestos, explotar fallos de configuracion
 
 ---
 ## 1.  Escaneo de Puerto. Nmap
-
 >[!NOTE] 
 >**🎯  Objetivo**
 >
@@ -26,7 +25,6 @@ El objetivo es identificar servicios expuestos, explotar fallos de configuracion
 >**HTTP 80 open**
 ---
 ## 2.  Impeccion del Servicio Web. Reconocimiento HTTP 
-
 >[!NOTE] 
 >**🎯  Objetivo**
 >
@@ -36,7 +34,6 @@ El objetivo es identificar servicios expuestos, explotar fallos de configuracion
 
 ---
 ## 3.  Descripción del Procedimiento / Metodología de Ejecución
-
 >[!NOTE]
 > **🎯  Objetivo**
 >
