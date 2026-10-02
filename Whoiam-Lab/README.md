@@ -101,17 +101,26 @@ gobuster dir -u http://172.18.0.2 -w /usr/share/wordlists/dirbuster/directory-li
 >
 >Se transfiere el archivo hacia el equipo atacante y se extraen sus elementos:
 >
->```
+>```bash
+>
 >wget http://172.18.0
 >
->unzip databaseback2may.zip```
+>unzip databaseback2may.zip
+>```
 
-> [!info] Inspección del Archivo Extraído
-> Tras descomprimir el paquete `.zip`, se obtuvo el archivo `29DBMay`. Se procede a analizar su tipo y contenido mediante comandos de consola:
+>[!NOTE]
+>### Inspección del Archivo Extraído
+>
+>La descompresión generó un archivo plano de nombre `29DBMay`. Al examinar su contenido, se localizaron credenciales de acceso administrativo expuestas en texto plano:
+>
+>```bash
+>
+>cat 29DBMay
+>```
+>
+>* **Username:** `developer`
 > 
-> ```bash
-> cat 29DBMay
-> ```
+>* **Password:** `2wmy3KrGDRD%RsA7Ty5n71L^`
 
 >[!success] Credenciales Expuestas en Respaldo
 >Al ejecutar cat 29DBMay, se hallaron credenciales válidas en texto plano:
