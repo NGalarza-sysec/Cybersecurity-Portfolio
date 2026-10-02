@@ -44,7 +44,7 @@ El objetivo es identificar servicios expuestos, explotar fallos de configuracion
 Para ello, se emplea la herramienta Gobuster v3.8 en modo dir, configurada bajo los siguientes parámetros técnicos:**
 >
 >• Diccionario utilizado: directory-list-2.3-medium.txt (Wordlist estándar para la identificación de rutas comunes).
-
+>
 >• Filtro de extensiones: Se realiza una búsqueda dirigida para localizar archivos con extensiones específicas como .php, .html, .sh, .py, .zip y .rar, optimizando así el descubrimiento tanto de scripts de ejecución como de posibles contenedores de respaldo comprimidos.
 >
 >• Objetivo: Analizar las respuestas del servidor (códigos de estado HTTP como 200 OK o 301 Moved Permanently) para mapear de forma precisa la estructura interna del sitio web bajo auditoría.
