@@ -10,7 +10,6 @@ El objetivo es identificar servicios expuestos, explotar fallos de configuracion
 
 * **Objetivo de Evaluación:** Máquina Whoiam (IP: `172.18.0.2`)
 
----
 ## 1.  Escaneo de Puerto. (Nmap)
 
 >[!NOTE] 
@@ -25,21 +24,19 @@ nmap 172.18.0.2
 
 >[!NOTE] 
 >**✅  Resultado:**
->* **Port 80/tcp:** Servicio HTTP abierto (Servidor Web).
-> 
->Interactuar con el servicio HTTP expuesto en el puerto 80 para auditar el contenido de la página web principal.
-Al navegar a la dirección `http://172.18.0.2`, se observa una landing page estática con el título *"Whoiam: I don't know who I am, I have to find out."* y un botón de interacción (*About us*). No se aprecian formularios ni parámetros visibles a simple vista.
+> El análisis determinó que el siguiente puerto se encuentra accesible:
 >
----
+>* **Port 80/tcp:** Servicio HTTP abierto (Servidor Web).
+
 ## 2.  Impeccion del Servicio Web. Reconocimiento HTTP 
 >[!NOTE] 
 >**🎯  Objetivo**
+> Interactuar con el servicio HTTP expuesto en el puerto 80 para auditar el contenido de la página web principal.
 >
->**Navegar al Servicio web:** 
+>Al navegar a la dirección `http://172.18.0.2`, se observa una landing page estática con el título *"Whoiam: I don't know who I am, I have to find out."* y un botón de interacción (*About us*). No se aprecian formularios ni parámetros visibles a simple vista.
 
 ![](Imagenes/IMG-2.png)
 
----
 ## 3.  Descripción del Procedimiento / Metodología de Ejecución
 >[!NOTE]
 > **🎯  Objetivo**
