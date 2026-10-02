@@ -13,14 +13,14 @@ El objetivo es identificar servicios expuestos, explotar fallos de configuracion
 
 > [!TARGET] 
 **Objetivo**
-> **Indentificar Puertos abiertos Ejecutando Nmap 172.18.0.2**
+**Indentificar Puertos abiertos Ejecutando Nmap 172.18.0.2**
 
-![[IMG-1.png]]
 ![](Imagenes/IMG-1.png)
 
 > [!note] 
 **Resultado:**
->>[!success] 
+
+> [!success] 
 **HTTP 80 open**
 
 ---
