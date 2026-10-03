@@ -15,11 +15,12 @@ El objetivo es identificar servicios expuestos, explotar fallos de configuracion
 > 2. [Inspección del Servicio Web](#sec2)
 > 3. [Análisis de Vulnerabilidad en Plugin](#sec3)
 > 4. [Explotación y Acceso Inicial](#sec4)
-> 5. [Tratamiento y Estabilización de la Terminal (TTY Stabilization)](#sec5)
-> 5.2. [Autenticación y Acceso al Panel de Administración (WordPress)](#sec5.2)
-> 7. [Escalación de Privilegios](#sec6)
-> 8. [Resumen de la Cadena Completa](#sec7)
-> 9. [Recomendaciones de Hardening (Mitigación)](#sec8)
+> 5. [Fase de Explotación](#sec5)
+>* 5.6 [Tratamiento y Estabilización de la Terminal (TTY Stabilization)](#sec5.6)
+> 6. [Escalación de Privilegios](#sec6)
+> 7. [Resumen de la Cadena Completa](#sec7)
+> 8. [Recomendaciones de Hardening (Mitigación)](#sec8)
+
 
 <a name="sec1"></a>
 ## 1. Escaneo de Puerto. (Nmap)
@@ -132,7 +133,7 @@ El objetivo es identificar servicios expuestos, explotar fallos de configuracion
 >![](Imagenes/IMG-5.png)
 
 >[!NOTE]
-><a name="sec1"></a>
+>
 >### 5.2 Autenticación y Acceso al Panel de Administración (WordPress)
 >
 >Las credenciales obtenidas se validaron en el formulario `/wp-login.php`, logrando un inicio de sesión exitoso y acceso total al *Dashboard* (`/wp-admin/`) bajo el contexto del usuario `developer`.
@@ -226,7 +227,9 @@ El objetivo es identificar servicios expuestos, explotar fallos de configuracion
 >
 >**El servidor web procesa el script de manera indefinida, lo que confirma que el subproceso interactivo de `/bin/bash` se ha enlazado con éxito hacia nuestra consola.**
 
+<a name="sec5.6"></a>
 >[!NOTE]
+>
 >### 5.6 Tratamiento y Estabilización de la Terminal (TTY Stabilization)
 >Para evitar la pérdida accidental de la sesión y habilitar funciones nativas (autocompletado, colores, combinaciones de teclas e historial), se ejecuta la técnica estándar de estabilización TTY:
 >
