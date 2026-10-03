@@ -136,7 +136,7 @@ gobuster dir -u http://172.18.0.2 -w /usr/share/wordlists/dirbuster/directory-li
 >  
 >* **Tema Activo:** **`Twenty Twenty-Four`**
 >  
-* **Plugins Instalados:** **`Modern Events Calendar (M.E. Calendar)`**
+>* **Plugins Instalados:** **`Modern Events Calendar (M.E. Calendar)`**
   
 ![](Imagenes/IMG-6.png)
 ![](Imagenes/IMG-7.png)
