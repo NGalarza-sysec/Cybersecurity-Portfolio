@@ -347,6 +347,6 @@ El objetivo es identificar servicios expuestos, explotar fallos de configuracion
 >       echo "Correct"
 >   fi
 >   ```
->2. **Principio de Menor Privilegio (Sudoers):** Retirar las reglas `NOPASSWD` de los binarios interactivos (`find` y `debugfs`). Evitar delegar accesos de superusuario a scripts que interactúen directamente con entradas >suministradas por los usuarios.
+>2. **Principio de Menor Privilegio (Sudoers):** Retirar las reglas `NOPASSWD` de los binarios interactivos (`find` y `debugfs`). Evitar delegar accesos de superusuario a scripts que interactúen directamente con entradas suministradas por los usuarios.
 >
->3. **Seguridad en WordPress y Sistema de Archivos:** Activar la directiva `define('DISALLOW_FILE_MODS', true);` en el archivo `wp-config.php` para bloquear la carga arbitraria de plugins desde la web. Adicionalmente, eliminar de >forma estricta respaldos antiguos (`.zip`, `.sql`) expuestos en la raíz del servidor web.
+>3. **Seguridad en WordPress y Sistema de Archivos:** Activar la directiva `define('DISALLOW_FILE_MODS', true);` en el archivo `wp-config.php` para bloquear la carga arbitraria de plugins desde la web. Adicionalmente, eliminar de forma estricta respaldos antiguos (`.zip`, `.sql`) expuestos en la raíz del servidor web.
