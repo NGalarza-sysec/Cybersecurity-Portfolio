@@ -13,7 +13,7 @@ El objetivo es identificar servicios expuestos, explotar fallos de configuracion
 >[!NOTE] 
 >**🎯  Objetivo**
 >
->**Indentificar Puertos abiertos Ejecutando Nmap 172.18.0.2**
+>**Identificar Puertos abiertos Ejecutando Nmap 172.18.0.2**
 >
 >```bash
 >nmap 172.18.0.2
@@ -26,7 +26,7 @@ El objetivo es identificar servicios expuestos, explotar fallos de configuracion
 >
 >* **Port 80/tcp:** Servicio HTTP abierto (Servidor Web).
 
-## 2.  Impeccion del Servicio Web. Reconocimiento HTTP 
+## 2.  Inspección del Servicio Web. Reconocimiento HTTP 
 >[!NOTE] 
 >**🎯  Objetivo**
 >
@@ -95,7 +95,7 @@ El objetivo es identificar servicios expuestos, explotar fallos de configuracion
 >
 >```bash
 >
->wget http://172.18.0
+>wget http://172.18.0/backups/databaseback2may.zip
 >
 >unzip databaseback2may.zip
 >```
