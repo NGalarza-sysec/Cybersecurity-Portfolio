@@ -330,7 +330,7 @@ El objetivo es identificar servicios expuestos, explotar fallos de configuracion
 >```
 >![](Imagenes/IMG-17.png)
 
-## 6. Resumen de la Cadena Completa
+## 7. Resumen de la Cadena Completa
 
 | Fase                       | Contexto Inicial  | Vector / Herramienta              | Contexto Obtenido |
 | :------------------------- | :---------------- | :-------------------------------- | :---------------- |
@@ -339,4 +339,14 @@ El objetivo es identificar servicios expuestos, explotar fallos de configuracion
 | 3. Escalación Horizontal 2 | `rafa`            | `sudo -u ruben /usr/sbin/debugfs` | `ruben`           |
 | 4. Escalación Vertical     | `ruben`           | Inyección en `/opt/penguin.sh`    | **`root`**        |
 
-
+## 8.Recomendaciones de Hardening (Mitigación)
+>[!WARNING]
+>1. **Sanitización de Scripts en Bash:** Modificar el script `/opt/penguin.sh` implementando una validación estricta por expresiones regulares para asegurar que el contenido sea netamente numérico antes de su evaluación:
+>  ```bash
+>   if [[ "$num" =~ ^[0-9]+$ ]] && [[ "$num" -eq 42 ]]; then
+>       echo "Correct"
+>   fi
+>   ```
+>2. **Principio de Menor Privilegio (Sudoers):** Retirar las reglas `NOPASSWD` de los binarios interactivos (`find` y `debugfs`). Evitar delegar accesos de superusuario a scripts que interactúen directamente con entradas >suministradas por los usuarios.
+>
+>3. **Seguridad en WordPress y Sistema de Archivos:** Activar la directiva `define('DISALLOW_FILE_MODS', true);` en el archivo `wp-config.php` para bloquear la carga arbitraria de plugins desde la web. Adicionalmente, eliminar de >forma estricta respaldos antiguos (`.zip`, `.sql`) expuestos en la raíz del servidor web.
