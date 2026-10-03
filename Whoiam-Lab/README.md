@@ -38,6 +38,7 @@ El objetivo es identificar servicios expuestos, explotar fallos de configuracion
 >
 >* **Port 80/tcp:** Servicio HTTP abierto (Servidor Web).
 
+<a name="sec2"></a>
 ## 2.  Inspección del Servicio Web. Reconocimiento HTTP 
 >[!NOTE] 
 >**🎯  Objetivo**
@@ -48,6 +49,7 @@ El objetivo es identificar servicios expuestos, explotar fallos de configuracion
 >
 >![](Imagenes/IMG-2.png)
 
+<a name="sec3"></a>
 ## 3. Descubrimiento de Rutas (Fuzzing con Gobuster)
 >[!NOTE]
 > **🎯  Objetivo**
@@ -69,7 +71,8 @@ El objetivo es identificar servicios expuestos, explotar fallos de configuracion
 >* `/wp-login.php` (Status: 200) -> **Panel de inicio de sesión administrativo.** 
 >* `/backups/` (Status: 301) -> **Directorio de almacenamiento expuesto.**
 >* `readme.html` (Status: 200) -> **Archivo de documentación por defecto de WordPress.**
-  
+
+<a name="sec4"></a>
 ## 4. Plan de Acción y Rutas de Explotación
 >[!NOTE]
 >**A partir del reconocimiento previo, se trazan tres vectores potenciales de ataque:**
@@ -93,6 +96,7 @@ El objetivo es identificar servicios expuestos, explotar fallos de configuracion
 > 
 > Revisión del archivo de texto expuesto para extraer la versión exacta del CMS y contrastar vulnerabilidades públicas asociadas en bases de datos como *Searchsploit*.
 
+<a name="sec5"></a>
 ## 5. Fase de Explotación
 >[!NOTE]
 >### 5.1 Explotación de la Ruta 1: Análisis del Respaldo Web
@@ -250,6 +254,7 @@ El objetivo es identificar servicios expuestos, explotar fallos de configuracion
 >Con este paso completado, se valida el nivel de acceso inicial obtenido en el sistema:
 >* **Usuario:** `www-data` (Cuenta de servicio web restringida).
 
+<a name="sec6"></a>
 ## 6. Escalación de Privilegios
 >[!NOTE]
 >### 6.1 Identificación de Permisos Elevados (`sudo -l`)
@@ -342,6 +347,7 @@ El objetivo es identificar servicios expuestos, explotar fallos de configuracion
 >```
 >![](Imagenes/IMG-17.png)
 
+<a name="sec7"></a>
 ## 7. Resumen de la Cadena Completa
 
 | Fase                       | Contexto Inicial  | Vector / Herramienta              | Contexto Obtenido |
