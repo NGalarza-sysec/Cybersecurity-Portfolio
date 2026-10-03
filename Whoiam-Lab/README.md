@@ -16,7 +16,7 @@ El objetivo es identificar servicios expuestos, explotar fallos de configuracion
 > 3. [Análisis de Vulnerabilidad en Plugin](#sec3)
 > 4. [Explotación y Acceso Inicial](#sec4)
 > 5. [Tratamiento y Estabilización de la Terminal (TTY Stabilization)](#sec5)
->   * 5.2. [Autenticación y Acceso al Panel de Administración (WordPress)](#sec5.2)
+> 5.2. [Autenticación y Acceso al Panel de Administración (WordPress)](#sec5.2)
 > 7. [Escalación de Privilegios](#sec6)
 > 8. [Resumen de la Cadena Completa](#sec7)
 > 9. [Recomendaciones de Hardening (Mitigación)](#sec8)
