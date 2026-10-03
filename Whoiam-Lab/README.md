@@ -16,9 +16,10 @@ El objetivo es identificar servicios expuestos, explotar fallos de configuracion
 > 3. [Análisis de Vulnerabilidad en Plugin](#sec3)
 > 4. [Explotación y Acceso Inicial](#sec4)
 > 5. [Tratamiento y Estabilización de la Terminal (TTY Stabilization)](#sec5)
-> 6. [Escalación de Privilegios](#sec6)
-> 7. [Resumen de la Cadena Completa](#sec7)
-> 8. [Recomendaciones de Hardening (Mitigación)](#sec8)
+>   * 5.2. [Autenticación y Acceso al Panel de Administración (WordPress)](#sec5.2)
+> 7. [Escalación de Privilegios](#sec6)
+> 8. [Resumen de la Cadena Completa](#sec7)
+> 9. [Recomendaciones de Hardening (Mitigación)](#sec8)
 
 <a name="sec1"></a>
 ## 1. Escaneo de Puerto. (Nmap)
@@ -131,7 +132,7 @@ El objetivo es identificar servicios expuestos, explotar fallos de configuracion
 >![](Imagenes/IMG-5.png)
 
 >[!NOTE]
->
+><a name="sec1"></a>
 >### 5.2 Autenticación y Acceso al Panel de Administración (WordPress)
 >
 >Las credenciales obtenidas se validaron en el formulario `/wp-login.php`, logrando un inicio de sesión exitoso y acceso total al *Dashboard* (`/wp-admin/`) bajo el contexto del usuario `developer`.
