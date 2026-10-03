@@ -8,8 +8,20 @@ El objetivo es identificar servicios expuestos, explotar fallos de configuracion
 * **Auditoria:** [NGalarza-sysec]
 * **Objetivo de Evaluación:** Máquina Whoiam (IP: `172.18.0.2`)
 
-## 1.  Escaneo de Puerto. (Nmap)
+> [!IMPORTANT]
+> **Índice de Contenidos**
+>
+> 1. [Reconocimiento y Enumeración Inicial](#sec1)
+> 2. [Inspección del Servicio Web](#sec2)
+> 3. [Análisis de Vulnerabilidad en Plugin](#sec3)
+> 4. [Explotación y Acceso Inicial](#sec4)
+> 5. [Tratamiento y Estabilización de la Terminal (TTY Stabilization)](#sec5)
+> 6. [Escalación de Privilegios](#sec6)
+> 7. [Resumen de la Cadena Completa](#sec7)
+> 8. [Recomendaciones de Hardening (Mitigación)](#sec8)
 
+<a name="sec1"></a>
+## 1. Escaneo de Puerto. (Nmap)
 >[!NOTE] 
 >**🎯  Objetivo**
 >
@@ -339,6 +351,7 @@ El objetivo es identificar servicios expuestos, explotar fallos de configuracion
 | 3. Escalación Horizontal 2 | `rafa`            | `sudo -u ruben /usr/sbin/debugfs` | `ruben`           |
 | 4. Escalación Vertical     | `ruben`           | Inyección en `/opt/penguin.sh`    | **`root`**        |
 
+<a name="sec8"></a>
 ## 8.Recomendaciones de Hardening (Mitigación)
 >[!WARNING]
 >1. **Sanitización de Scripts en Bash:** Modificar el script `/opt/penguin.sh` implementando una validación estricta por expresiones regulares para asegurar que el contenido sea netamente numérico antes de su evaluación:
